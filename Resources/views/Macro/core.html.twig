@@ -1,0 +1,46 @@
+{% macro pagination(currentPage, maxPages, maxPerPage) %}
+    {% if maxPages > 1 %}
+        <ul>
+        	<li class="first" title="First Page">
+                <a {% if currentPage > 1 %}href="?currentPage=1"{% else %}class="inactive"{% endif %}><i class="fa fa-angle-double-left"></i></a>
+            </li>
+        	<li class="prev" title="Previous Page">
+                <a {% if currentPage > 1 %}href="?currentPage={{ currentPage-1 }}"{% else %}class="inactive"{% endif %}><i class="fa fa-angle-left"></i></a>
+            </li>
+    		{% if maxPages < 12 %}
+    			{% for i in 1..maxPages %}
+    	    		<li><a {% if i == currentPage %}class="active"{% else %}href="?currentPage={{ i }}"{% endif %}>{{ i }}</a></li>
+    			{% endfor %}
+            {% else %}
+                <li><a {% if 1 == currentPage %}class="active"{% else %}href="?currentPage=1"{% endif %}>1</a></li>
+                {# first #}
+                {% if currentPage < 8 %}
+                    {% for i in 2..11 %}
+                        <li><a {% if i == currentPage %}class="active"{% else %}href="?currentPage={{ i }}"{% endif %}>{{ i }}</a></li>
+                    {% endfor %}
+                    <li><a {% if maxPages - 1 == currentPage %}class="active"{% else %}href="?currentPage={{ maxPages - 1 }}"{% endif %}>&hellip;</a></li>
+                {% elseif currentPage > (maxPages - 7) %}
+                    <li><a {% if 2 == currentPage %}class="active"{% else %}href="?currentPage=2"{% endif %}>&hellip;</a></li>
+                    {% for i in (maxPages - 10)..(maxPages - 1) %}
+                        <li><a {% if i == currentPage %}class="active"{% else %}href="?currentPage={{ i }}"{% endif %}>{{ i }}</a></li>
+                    {% endfor %}
+                {% else %}
+                     <li><a {% if 2 == currentPage %}class="active"{% else %}href="?currentPage=2"{% endif %}>&hellip;</a></li>
+                    {% for i in (currentPage - 4)..(currentPage + 4) %}
+                        <li><a {% if i == currentPage %}class="active"{% else %}href="?currentPage={{ i }}"{% endif %}>{{ i }}</a></li>
+                    {% endfor %}
+                    <li><a {% if maxPages - 1 == currentPage %}class="active"{% else %}href="?currentPage={{ maxPages - 1 }}"{% endif %}>&hellip;</a></li>
+                {% endif %}
+                {# last #}
+                <li><a {% if maxPages == currentPage %}class="active"{% else %}href="?currentPage={{ maxPages }}"{% endif %}>{{ maxPages }}</a></li>
+    		{% endif %}
+        	<li class="next" title="Next Page">
+                <a {% if currentPage < maxPages %}href="?currentPage={{ currentPage+1 }}"{% else %}class="inactive"{% endif %}><i class="fa fa-angle-right"></i></a>
+            </li>
+        	<li class="last" title="Last Page">
+                <a {% if currentPage < maxPages %}href="?currentPage={{ maxPages }}"{% else %}class="inactive"{% endif %}><i class="fa fa-angle-double-right"></i></a>
+            </li>
+            <br class="clear">
+        </ul>
+    {% endif %}
+{% endmacro %}

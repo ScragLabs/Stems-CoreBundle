@@ -1,0 +1,9 @@
+services:
+    stems.core.pagination:
+        class: Stems\CoreBundle\Service\Pagination
+
+    stems.core.googlemap:
+        class: Stems\CoreBundle\Service\GoogleMap
+
+    stems.core.scrape:
+        class: Stems\CoreBundle\Service\Scrape

@@ -1,0 +1,15 @@
+stems_admin_core_dashboard:
+    pattern:  /admin
+    defaults: { _controller: StemsCoreBundle:Admin:dashboard }
+
+stems_admin_core_settings_overview:
+    pattern:  /admin/settings
+    defaults: { _controller: StemsCoreBundle:Admin:index }
+
+stems_admin_core_developer_overview:
+    pattern:  /admin/developer
+    defaults: { _controller: StemsCoreBundle:Admin:developerDashboard }
+
+stems_admin_core_developer_generate_sitemap:
+    pattern:  /admin/developer/sitemap
+    defaults: { _controller: StemsCoreBundle:Admin:sitemap }

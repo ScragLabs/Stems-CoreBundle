@@ -1,0 +1,16 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Admin Dashboard</h1>
+	<div class="dashboard-entry">
+		{{ render(controller('StemsPageBundle:Admin:dashboard')) }}
+	</div>
+	<div class="dashboard-entry">
+		{{ render(controller('StemsBlogBundle:Admin:dashboard')) }}
+	</div>
+	<div class="dashboard-entry">
+		{{ render(controller('StemsSocialBundle:Admin:dashboard')) }}
+	</div>
+{% endblock %}
