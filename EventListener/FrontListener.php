@@ -7,7 +7,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException,
     Doctrine\ORM\EntityManager;
 
 use Stems\CoreBundle\Controller\BaseFrontController,
-    Stems\PageBundle\Entity\Page;
+    Stems\PageBundle\Entity\Page,
+    Stems\PageBundle\Entity\Layout;
 
 class FrontListener
 {
@@ -46,14 +47,17 @@ class FrontListener
             {
                 $controller->page = $this->em->getRepository('StemsPageBundle:Page')->load($path);
             }
-            // if the absolute path doesn't work due to dynamix slug components, then attempt estimate the page
+            // if the absolute path doesn't work due to dynamic slug components attempt estimate the page
             catch (\Exception $e) 
             {
                 $controller->page = $this->em->getRepository('StemsPageBundle:Page')->estimate($path);
 
-                // if all else fails it probably doesn't exist, so create a generic page object that uses the default layout
+                // if all else fails it probably doesn't exist, so create a generic page object that uses a default content layout
                 if (!is_object($controller->page)) {
-                    $controller->page = new Page();    
+                    $controller->page = new Page();
+                    $layout = new Layout();
+                    $layout->setSlug('content');
+                    $controller->page->setLayout($layout);
                 }
             }
         }
