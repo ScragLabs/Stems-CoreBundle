@@ -1,11 +1,13 @@
-<div class="admin-popup {% block classes %}{# custom classes go here #}{% endblock %}">
-	<div class="header">
-		<h6>{% block title %}{# popup title goes here #}{% endblock %}</h6>
-		<button class="close"><i class="fa fa-cross"></i></button>
-	</div>
-	<div class="body">
-		{% block content %}
-			{# popup body goes here #}
-		{% endblock %}
+<div class="admin-popup-background">
+	<div class="admin-popup {% block classes %}{# custom classes go here #}{% endblock %}">
+		<div class="header">
+			<h6>{% block title %}{# popup title goes here #}{% endblock %}</h6>
+			<button class="close-popup"><i class="fa fa-times"></i></button>
+		</div>
+		<div class="body">
+			{% block content %}
+				{# popup body goes here #}
+			{% endblock %}
+		</div>
 	</div>
 </div>
