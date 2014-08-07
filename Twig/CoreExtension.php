@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Stems\CoreBundle\Twig;

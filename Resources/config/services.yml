@@ -8,9 +8,9 @@ services:
     stems.core.scrape:
         class: Stems\CoreBundle\Service\Scrape
 
-	stems.core.twig.core_extension:
-	        class: Stems\CoreBundle\Twig\CoreExtension
-	        arguments: 
-	        	em: "@doctrine.orm.entity_manager"
-	        tags:
-	            - { name: twig.extension }
+    stems.core.twig.core_extension:
+            class: Stems\CoreBundle\Twig\CoreExtension
+            arguments: 
+                em: "@doctrine.orm.entity_manager"
+            tags:
+                - { name: twig.extension }
