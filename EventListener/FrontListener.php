@@ -1,12 +1,12 @@
-<?
+<?php
 
 namespace Stems\CoreBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException,
     Symfony\Component\HttpKernel\Event\FilterControllerEvent,
-    Doctrine\ORM\EntityManager;
-
-use Stems\CoreBundle\Controller\BaseFrontController,
+    Doctrine\ORM\EntityManager,
+    Stems\CoreBundle\Controller\BaseFrontController,
+    Stems\PageBundle\Exception\PageNotFoundException,
     Stems\PageBundle\Entity\Page,
     Stems\PageBundle\Entity\Layout;
 
@@ -48,7 +48,7 @@ class FrontListener
                 $controller->page = $this->em->getRepository('StemsPageBundle:Page')->load($path);
             }
             // if the absolute path doesn't work due to dynamic slug components attempt estimate the page
-            catch (\Exception $e) 
+            catch (PageNotFoundException $e) 
             {
                 $controller->page = $this->em->getRepository('StemsPageBundle:Page')->estimate($path);
 
