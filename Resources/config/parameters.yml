@@ -1,0 +1,5 @@
+parameters:
+    stems.site.name: 'Thread & Mirror'
+    stems.site.url: 'http://www.threadandmirror.com'
+    stems.site.description: 'All Luxury, One Site: Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts'
+    stems.site.email: 'info@threadandmirror.com'

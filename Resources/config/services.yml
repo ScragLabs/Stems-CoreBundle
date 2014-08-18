@@ -14,3 +14,10 @@ services:
                 em: "@doctrine.orm.entity_manager"
             tags:
                 - { name: twig.extension }
+
+    stems.core.front_listener:
+        class: Stems\CoreBundle\EventListener\FrontListener
+        arguments: 
+            em: "@doctrine.orm.entity_manager"
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
