@@ -1,4 +1,9 @@
 services:
+    stems.core.bundles.management:
+        class: Stems\CoreBundle\Service\BundleManagementService
+        arguments: 
+            bundles: %kernel.bundles%
+
     stems.core.pagination:
         class: Stems\CoreBundle\Service\Pagination
 

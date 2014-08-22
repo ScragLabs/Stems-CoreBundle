@@ -10,35 +10,53 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
 {
-	protected $developerHome = 'stems_admin_core_developer_overview';
-
-	/**
-	 * Filter out the active bundles relevant to Stems and Thread & Mirror
-	 */
-	protected function getActiveBundles()
-	{
-		// get all loaded bundles
-		$bundles = $this->container->getParameter('kernel.bundles');
-
-		// remove the core bundle
-		unset($bundles['StemsCoreBundle']);
-
-		// filter the relevent Stems and ThreadAndMirror bundles
-		foreach ($bundles as $key => $bundle) {
-			if (!stristr($bundle, 'Stems') && !stristr($bundle, 'ThreadAndMirror')) {
-				unset($bundles[$key]);
-			}
-		}
-
-		return $bundles;
-	}
+	protected $home = 'stems_admin_core_developer_overview';
 
 	/**
 	 * The admin toolbar
+	 * @todo - ordering
+	 * @todo - menu objects from menu bundle
 	 */
 	public function barAction()
 	{
-		return $this->render('StemsCoreBundle:Admin:bar.html.twig');
+		// Load the active Stems and bespoke bundles
+		$bundles = $this->get('stems.core.bundles.management')->getActiveBundles();
+
+		// Load the core menu items for each bundle
+		$core = array();
+
+		foreach ($bundles as $name => $bundle) {
+			if ($this->container->hasParameter('stems.admin.menu_core_'.$name)) {
+				$items = $this->container->getParameter('stems.admin.menu_core_'.$name);
+				$core = array_merge($core, $items); 
+			}
+		}
+
+		// Load the bespoke menu items
+		$bespoke = array();
+
+		foreach ($bundles as $name => $bundle) {
+			if ($this->container->hasParameter('stems.admin.menu_bespoke_'.$name)) {
+				$items = $this->container->getParameter('stems.admin.menu_bespoke_'.$name);
+				$bespoke = array_merge($bespoke, $items); 
+			}
+		}
+
+		// Load the config menu items
+		$config = array();
+
+		foreach ($bundles as $name => $bundle) {
+			if ($this->container->hasParameter('stems.admin.menu_config_'.$name)) {
+				$items = $this->container->getParameter('stems.admin.menu_config_'.$name);
+				$config = array_merge($config, $items);
+			}
+		}
+
+		return $this->render('StemsCoreBundle:Admin:bar.html.twig', array(
+			'core'    => $core,
+			'bespoke' => $bespoke,
+			'config'  => $config,
+		));
 	}
 
 	/**
@@ -46,8 +64,8 @@ class AdminController extends Controller
 	 */
 	public function dashboardAction()
 	{
-		// get all loaded bundles
-		$bundles = $this->getActiveBundles();
+		// Load the active Stems and bespoke bundles
+		$bundles = $this->get('stems.core.bundles.management')->getActiveBundles();
 
 		return $this->render('StemsCoreBundle:Admin:dashboard.html.twig', array(
 			'bundles'	=> $bundles,
@@ -59,8 +77,8 @@ class AdminController extends Controller
 	 */
 	public function developerDashboardAction()
 	{
-		// get all loaded bundles
-		$bundles = $this->getActiveBundles();
+		// Load the active Stems and bespoke bundles
+		$bundles = $this->get('stems.core.bundles.management')->getActiveBundles();
 
 		return $this->render('StemsCoreBundle:Admin:developerDashboard.html.twig', array(
 			'bundles'	=> $bundles,
@@ -72,8 +90,8 @@ class AdminController extends Controller
 	 */
 	public function sitemapAction(Request $request)
 	{
-		// get all loaded bundles
-		$bundles = $this->getActiveBundles();
+		// Load the active Stems and bespoke bundles
+		$bundles = $this->get('stems.core.bundles.management')->getActiveBundles();
 
 		// render the xml sitemap
 		$xml = $this->renderView('StemsCoreBundle:Admin:sitemap.html.twig', array(
@@ -88,7 +106,7 @@ class AdminController extends Controller
 		fclose($handle);
 
 		$request->getSession()->setFlash('success', 'The sitemap has been updated.');
-		return $this->redirect($this->generateUrl($this->developerHome));
+		return $this->redirect($this->generateUrl($this->home));
 	}
 }
 

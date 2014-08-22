@@ -1,8 +1,19 @@
 <ul class="core">
-	<li><a href="/admin/pages" title="Pages"><i class="fa fa-file-text-o"></i></a></li>
-	<li><a href="/admin/blog" title="Blog"><i class="fa fa-comment-o"></i></a></li>
+	{% for item in core	%}
+		<li>
+			<a href="{{ path(item['route']) }}" title="{{ item['title'] }}"><i class="{{ item['icon'] }}"></i></a>
+			{% if item.children is not empty %}
+				<ul>
+					{% for child in item.children %}
+						<li><a href="{{ path(child['route']) }}"><i class="{{ child['icon'] }}"></i> {{ child['title'] }}</a></li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</li>
+	{% endfor %}
+	{# <li><a href="/admin/pages" title="Pages"><i class="fa fa-file-text-o"></i></a></li>
 	<li><a href="/admin/media" title="Media"><i class="fa fa-film"></i></a></li>
-	<li><a href="/admin/social/instagram" title="Social"><i class="fa fa-share-alt"></i></a></li>
+	<li><a href="/admin/social/instagram" title="Social"><i class="fa fa-share-alt"></i></a></li> #}
 </ul>
 <ul class="bespoke">
 	<li><a href="/admin/products" title="Products"><i class="fa fa-shopping-cart"></i></a></li>
