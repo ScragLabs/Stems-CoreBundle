@@ -1,5 +1,20 @@
 parameters:
+
+    # Bundle specific
     stems.site.name: 'Thread & Mirror'
     stems.site.url: 'http://www.threadandmirror.com'
     stems.site.description: 'All Luxury, One Site: Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts'
     stems.site.email: 'info@threadandmirror.com'
+
+    # Admin menu items
+    stems.admin.menu_config_stemscorebundle:
+        stems_settings:
+            title: 'Settings'
+            route: 'stems_admin_core_settings_overview'
+            icon: 'fa fa-cogs'
+            children: []
+        stems_developer:
+            title: 'Developer Tools'
+            route: 'stems_admin_core_developer_overview'
+            icon: 'fa fa-code'
+            children: []

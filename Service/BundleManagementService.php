@@ -27,7 +27,7 @@ class BundleManagementService
 	}	
 
 	/**
-	 * A list of all active Stems bundles, ignoring Core but any bespoke bundles as defined in the config
+	 * A list of all active Stems bundles and any bespoke bundles as defined in the config
 	 *
 	 * @return array  		A list of bundles
 	 */
@@ -35,9 +35,6 @@ class BundleManagementService
 	{
 		// Get all loaded bundles
 		$bundles = $this->bundles;
-
-		// Remove the core bundle
-		unset($bundles['StemsCoreBundle']);
 
 		/**
 		 * @todo - handle config control bespoke bundles, like thread and mirror
