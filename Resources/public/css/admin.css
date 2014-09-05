@@ -732,6 +732,10 @@ input[type="submit"].btn.btn-mini {
 	height: 354px;
 }
 
+.admin-editor .edit-panel .preview-image-mini {
+	min-height: 177px;
+}
+
 .admin-editor .edit-panel .preview-image .button-holder {
 	width: 100%;
 	height: 100%;
@@ -992,7 +996,7 @@ button.full-size {
 
 .section-magazine .column textarea,
 .section-text-and-image .column textarea {
-	height: 300px !important;
+	height: 385px !important;
 }
 
 /* --- EDIT SECTION - SCRAPBOOK --- */
