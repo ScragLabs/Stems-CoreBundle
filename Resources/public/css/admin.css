@@ -918,9 +918,18 @@ button.full-size {
 }
 
 #add-section .available-sections a {
-	width: 207px;
+	width: 213px;
+	height: 20px;
 	float:left;
 	margin: 0 10px 10px 0;
+}
+
+#add-section .available-sections a:nth-child(3n) {
+	margin-right: 0;
+}
+
+#add-section .available-sections a > i {
+	line-height: 20px !important;
 }
 
 .admin-editor-controls {
