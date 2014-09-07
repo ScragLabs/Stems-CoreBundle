@@ -724,12 +724,12 @@ input[type="submit"].btn.btn-mini {
 .admin-editor .edit-panel .preview-image {
 	position: relative;
 	width: 354px;
+	min-height: 354px;
 }
 
 .admin-editor .edit-panel .preview-image-empty {
 	border: 1px dashed #DDDDDD;
 	background: #F7F7F7;
-	height: 354px;
 }
 
 .admin-editor .edit-panel .preview-image-mini {
