@@ -4,6 +4,14 @@ services:
         arguments: 
             bundles: %kernel.bundles%
 
+    stems.core.sections.manager:
+        class: Stems\CoreBundle\Service\SectionManagementService
+        arguments: 
+            em:          "@doctrine.orm.entity_manager"
+            twig:        "@templating"
+            formFactory: "@form.factory"
+            types:       %stems.sections.available%
+
     stems.core.pagination:
         class: Stems\CoreBundle\Service\Pagination
 
