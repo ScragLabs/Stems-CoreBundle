@@ -77,8 +77,8 @@ class SectionManagementService
 
 		// Get the section forms
 		foreach ($links as $link) {
-			var_dump($this->types[$this->bundle][$link->getType()->getId()]['entity']);die();
-			// The specific section data and render the form view
+
+			// Find the specific section data and render the form view
 			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
 
 			// Render the form view and store the html
@@ -90,11 +90,15 @@ class SectionManagementService
 
 	/**
 	 * Builds and returns the specific form object for the requested section
+	 *
+	 * @param  array  	$link 		The link entity for the section
+	 * @param  mixed 	$section 	The specific instance of the section type (eg. TextSection)
+	 * @return mixed 				The specific instance of the section's form object
 	 */
 	public function createSectionForm($link, $section)
 	{
-		// build the class name using the section type then create the form object
-        $formClass = 'Stems\\BlogBundle\\Form\\'.$link->getType()->getClass().'Type';
+		// Build the class name using the section type then create the form object
+        $formClass = $this->types[$this->bundle][$link->getType()->getId()]['form'];
         $form = $this->formFactory->create(new $formClass($link), $section);
 
         return $form;
