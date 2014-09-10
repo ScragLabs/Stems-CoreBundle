@@ -89,7 +89,7 @@ class SectionManagementService
 			if ($section) {
 				$forms[] = $section->editor($this, $link);	
 			} else {
-				$logger->error('The requested section (Entity ID: '.$link->getEntity().' - Section Type: '.$this->bundle][$link->getType()->getId()]['entity'].') does not exist.');
+				$logger->error('The requested section (Entity ID: '.$link->getEntity().' - Section Type: '.$this->types[$this->bundle][$link->getType()->getId()]['entity'].') does not exist.');
 			}
 		}
 
