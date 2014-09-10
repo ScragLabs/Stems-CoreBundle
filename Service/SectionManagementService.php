@@ -5,6 +5,7 @@ namespace Stems\CoreBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Bridge\Monolog\Logger;
 
 /**
  *	Handles the rendering, processing and other functionality of sections, commonly used in pages and blog posts
@@ -75,6 +76,9 @@ class SectionManagementService
 	{
 		$forms = array();
 
+		// Ready the logger
+		$logger = new Logger('main');
+
 		// Get the section forms
 		foreach ($links as $link) {
 
@@ -82,7 +86,11 @@ class SectionManagementService
 			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
 
 			// Render the form view and store the html
-			$forms[] = $section->editor($this, $link);		
+			if ($section) {
+				$forms[] = $section->editor($this, $link);	
+			} else {
+				$logger->error('The requested section (Entity ID: '.$link->getEntity().' - Section Type: '.$this->bundle][$link->getType()->getId()]['entity'].') does not exist.');
+			}
 		}
 
 		return $forms;
