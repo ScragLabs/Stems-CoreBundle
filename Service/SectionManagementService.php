@@ -82,7 +82,7 @@ class SectionManagementService
 			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
 
 			// Render the form view and store the html
-			$forms[] = $section->editor($this, $link);
+			$forms[] = $section->editor($this, $link);		
 		}
 
 		return $forms;
