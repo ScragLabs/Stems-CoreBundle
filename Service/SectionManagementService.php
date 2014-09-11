@@ -83,13 +83,13 @@ class SectionManagementService
 		foreach ($links as $link) {
 
 			// Find the specific section data and render the form view
-			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
+			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
 
 			// Render the form view and store the html
 			if ($section) {
 				$forms[] = $section->editor($this, $link);	
 			} else {
-				$logger->error('The requested section (Entity ID: '.$link->getEntity().' - Section Type: '.$this->types[$this->bundle][$link->getType()->getId()]['entity'].') does not exist.');
+				$logger->error('The requested section (Entity ID: '.$link->getEntity().' - Section Type: '.$this->types[$this->bundle][$link->getType()]['entity'].') does not exist.');
 			}
 		}
 
@@ -135,7 +135,7 @@ class SectionManagementService
 		try
 		{
 			// The specific section data and run the save
-			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
+			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
 			$section->save($this, $parameters, $request, $link);
 		}
 		catch(\Exception $e)
@@ -151,7 +151,7 @@ class SectionManagementService
 	public function renderSection($link)
 	{
 		// Get the specific section instance data and run the renderer
-		$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
+		$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
 		
 		return $section->render($this, $link);
 	}
