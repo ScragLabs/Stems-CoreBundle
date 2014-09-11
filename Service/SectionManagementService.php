@@ -5,6 +5,7 @@ namespace Stems\CoreBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Bridge\Monolog\Logger;
 
 /**
  *	Handles the rendering, processing and other functionality of sections, commonly used in pages and blog posts
@@ -75,14 +76,21 @@ class SectionManagementService
 	{
 		$forms = array();
 
+		// Ready the logger
+		$logger = new Logger('main');
+
 		// Get the section forms
 		foreach ($links as $link) {
-			var_dump($this->types[$this->bundle][$link->getType()->getId()]['entity']);die();
-			// The specific section data and render the form view
-			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()->getId()]['entity'])->find($link->getEntity());
+
+			// Find the specific section data and render the form view
+			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
 
 			// Render the form view and store the html
-			$forms[] = $section->editor($this, $link);
+			if ($section) {
+				$forms[] = $section->editor($this, $link);	
+			} else {
+				$logger->error('The requested section (Entity ID: '.$link->getEntity().' - Section Type: '.$this->types[$this->bundle][$link->getType()]['entity'].') does not exist.');
+			}
 		}
 
 		return $forms;
@@ -90,25 +98,31 @@ class SectionManagementService
 
 	/**
 	 * Builds and returns the specific form object for the requested section
+	 *
+	 * @param  array  	$link 		The link entity for the section
+	 * @param  mixed 	$section 	The specific instance of the section type (eg. TextSection)
+	 * @return mixed 				The specific instance of the section's form object
 	 */
 	public function createSectionForm($link, $section)
 	{
-		// build the class name using the section type then create the form object
-        $formClass = 'Stems\\BlogBundle\\Form\\'.$link->getType()->getClass().'Type';
-        $form = $this->formFactory->create(new $formClass($link), $section);
+		// Build the class name using the section type then create the form object
+        $formClass = $this->types[$this->bundle][$link->getType()->getId()]['form'];
+        $form      = $this->formFactory->create(new $formClass($link), $section);
 
         return $form;
 	}
 
 	/**
-	 * Builds and returns the specific form object for the requested sub section (eg. scrapbook image/text)
+	 * Builds and returns the specific form object for the requested sub-section
+	 *
+	 * @param  mixed 	$section 	The specific instance of the sub-section type (eg. ImageGalleryImage)
+	 * @return mixed 				The specific instance of the sub-section's form object
 	 */
 	public function createSubSectionForm($section)
 	{
-		// build the class name using the section type then create the form object
-		$entityClass = explode('\\Entity\\', get_class($section));
-        $formClass = 'Stems\\BlogBundle\\Form\\'.end($entityClass).'Type';
-        $form = $this->formFactory->create(new $formClass($section), $section);
+		// Build the class name using the section type then create the form object
+		$formClass = str_replace('\\Entity\\', '\\Form\\', get_class($section)).'Type';
+        $form 	   = $this->formFactory->create(new $formClass($section), $section);
 
         return $form;
 	}
@@ -120,13 +134,13 @@ class SectionManagementService
 	{
 		try
 		{
-			// the specific section data and run the save
-			$section = $this->em->getRepository('StemsBlogBundle:'.$link->getType()->getClass())->find($link->getEntity());
+			// The specific section data and run the save
+			$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
 			$section->save($this, $parameters, $request, $link);
 		}
 		catch(\Exception $e)
         {
-            // add an error message if the was a problem saving the section data
+            // Add an error message if the was a problem saving the section data
             $this->saveErrors[] = 'There was a problem saving section ID '.$link->getID().': '.$e->getMessage();
         }
 	}
@@ -136,8 +150,9 @@ class SectionManagementService
 	 */
 	public function renderSection($link)
 	{
-		// get the specific section instance data and run the renderer
-		$section = $this->em->getRepository('StemsBlogBundle:'.$link->getType()->getClass())->find($link->getEntity());
+		// Get the specific section instance data and run the renderer
+		$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
+		
 		return $section->render($this, $link);
 	}
 

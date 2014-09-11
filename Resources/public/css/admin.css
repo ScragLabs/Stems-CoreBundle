@@ -1177,6 +1177,11 @@ button.full-size {
 	width: 84px;
 	line-height: 19px;
 	letter-spacing: -2;
+	background-image: url('/vectors/stems-icon-white.svg');
+	background-size: 34px 34px;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	padding: 3px 0 0 32px;
 }
 
 #footer .wrap p.stems-logo span.stems-m {
