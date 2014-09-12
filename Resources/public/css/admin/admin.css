@@ -429,6 +429,8 @@ input[type="submit"].btn.btn-mini {
 } 
 
 .dashboard-entry .options a i {
+	font-size: 10px !important;
+	line-height: 12px !important;
 	margin-right: 5px;
 	width: 10px;
 	display: inline-block !important;
