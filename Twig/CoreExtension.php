@@ -3,23 +3,31 @@
 namespace Stems\CoreBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class CoreExtension extends \Twig_Extension
 {
+	/**
+	 * The service container
+	 */
+	protected $container;
+
 	/**
 	 * The entity manager
 	 */
 	protected $em;
 
-	public function __construct(EntityManager $em)
+	public function __construct(ContainerInterface $container, EntityManager $em)
 	{
-		$this->em = $em;
+		$this->container = $container;
+		$this->em 		 = $em;
 	}
 
 	public function getFilters()
 	{
 		return array(
 			new \Twig_SimpleFilter('username', array($this, 'usernameFilter')),
+			new \Twig_SimpleFilter('parameter', array($this, 'parameterFilter')),
 		);
 	}
 
@@ -37,15 +45,15 @@ class CoreExtension extends \Twig_Extension
 	 */
 	public function usernameFilter($id, $format='fullname')
 	{
-		// get the user entity
+		// Get the user entity
 		$user = $this->em->getRepository('StemsUserBundle:User')->find($id);
 
-		// skip if we can't find the user
+		// Skip if we can't find the user
 		if (!is_object($user)) {
 			return $id;
 		}
 
-		// build the get method and call it if it exists
+		// Build the get method and call it if it exists
 		$method = 'get'.ucfirst($format);
 
 		if (method_exists($user, $method)) {
@@ -53,5 +61,19 @@ class CoreExtension extends \Twig_Extension
 		} else {
 			return $id;
 		}
-	}	
+	}
+
+	/**
+	 * Turns a parameter string into it's relevant value, saves injecting loads of globals into twig
+	 *
+	 * @param  string   $format     The name of the required parameter
+	 * @return mixed                The value of the parameter
+	 */
+	public function parameterFilter($parameter)
+	{
+		// Attempt to get the parameter value
+		$value = $this->container->getParameter($parameter, null);
+
+		return $value;
+	}
 }

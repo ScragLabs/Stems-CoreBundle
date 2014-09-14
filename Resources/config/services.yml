@@ -24,6 +24,7 @@ services:
     stems.core.twig.core_extension:
             class: Stems\CoreBundle\Twig\CoreExtension
             arguments: 
+                container: "@service_container"
                 em: "@doctrine.orm.entity_manager"
             tags:
                 - { name: twig.extension }
