@@ -207,7 +207,7 @@ $(document).ready(function() {
 	});
 
 	/**
-	 * Perform a get request based on the url data on the originating element, also checks if the action requires login first
+	 * Standardised get request
 	 */
 	$('body').on('click', '.rest-get-request', function(e) {
 		e.preventDefault();
@@ -223,6 +223,31 @@ $(document).ready(function() {
 		});
 	});
 	
+	/**
+	 * Standardised post request
+	 */
+	$('body').on('click', '.rest-post-request', function(e) {
+		e.preventDefault();
+		var originator = $(this);
+		var form = originator.parent();
+		var buttonText = originator.html();
+		
+		originator.html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+
+		$.post(form.attr('action'), form.serialize()).done(function(data) {
+			originator.html(buttonText);
+
+			if (data.flash) {
+				createFlashMessage(data.status, data.message);
+			}
+
+			if (data.callback) {
+				var callback = data.callback;
+				eval(callback)(data, originator);
+			}
+		});
+	});
+
 	/**
 	 * Load more items, uses offset and api url data stored on the loading buffer element to get more items and append them
 	 */
