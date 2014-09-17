@@ -106,7 +106,7 @@ class SectionManagementService
 	public function createSectionForm($link, $section)
 	{
 		// Build the class name using the section type then create the form object
-        $formClass = $this->types[$this->bundle][$link->getType()->getId()]['form'];
+        $formClass = $this->types[$this->bundle][$link->getType()]['form'];
         $form      = $this->formFactory->create(new $formClass($link), $section);
 
         return $form;
@@ -129,6 +129,10 @@ class SectionManagementService
 
 	/**
 	 * Dynamic handler for posted form data when saving post sections
+	 *
+	 * @param  mixed 	$link  		The link entity for the section
+	 * @param  array  	$paramters 	The posted form paramters applicable to the section
+	 * @param  Request 	$request 	The request object
 	 */
 	public function saveSection($link, $parameters, $request)
 	{
@@ -147,6 +151,9 @@ class SectionManagementService
 
 	/**
 	 * Renders the front end html for a section
+	 *
+	 * @param  mixed 	$link  		The link entity for the section
+	 * @return string 				The rendered html for the section
 	 */
 	public function renderSection($link)
 	{
@@ -154,6 +161,42 @@ class SectionManagementService
 		$section = $this->em->getRepository($this->types[$this->bundle][$link->getType()]['entity'])->find($link->getEntity());
 		
 		return $section->render($this, $link);
+	}
+
+	/**
+	 * Renders the front end html for all sections of an entity
+	 *
+	 * @param  mixed 	$parent  	The entity owning sections for renderng
+	 * @return array 				A list containing html for each section
+	 */
+	public function renderSections($parent)
+	{
+		$sections = array();
+
+		// Gather html for each section
+		foreach ($parent->getSections() as $link) {
+			$sections[] = $this->renderSection($link);
+		}
+
+		return $sections; 
+	}
+
+	/**
+	 * Renders the front end html for all sections of collection of entities
+	 *
+	 * @param  mixed 	$parent  	The entities owning sections for rendering
+	 * @return array 				A list containing html for each section nested by entity
+	 */
+	public function renderCollection($parents)
+	{
+		$sections = array();
+
+		// Loop through each entity to gather the html for their sections
+		foreach ($parents as $parent) {
+			$sections[] = $this->renderSections($parent);
+		}
+
+		return $sections; 
 	}
 
 	/**
