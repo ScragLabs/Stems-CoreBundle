@@ -2,8 +2,9 @@
 
 namespace Stems\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-	Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Form;
 
 /**
  * This is the base rest controller for all Stems-compatible modules. It's main function is to provide tidy and homogenised JSON responses.
@@ -14,9 +15,10 @@ class BaseRestController extends Controller
 	 * Collects data ready for when the JSON response is compiles, with sensible defaults
 	 */
 	protected $data = array(
-		'status' => 'success',
-		'flash'	 => false,
-		'meta' 	 => array(),
+		'status'     => 'success',
+		'flash'	     => false,
+		'meta' 	 	 => array(),
+		'validation' => array(),
 	);
 
 	/**
@@ -99,5 +101,34 @@ class BaseRestController extends Controller
 	public function sendResponse()
 	{
 		return new JsonResponse($this->data);
+	}
+
+	/**
+	 * Takes a Form object and appends the errors to the response
+	 *
+	 * @param  Form 	$form 	The form to take the errors from
+	 * @return self
+	 */
+	public function addValidationErrors(Form $form) {
+
+		// Start the error list if it doesn't exist
+	    if (!array_key_exists('errors', $this->data['validation'])) {
+	    	$this->data['validation']['errors'] = array();
+	    }
+
+	    // Loop through the form children and the form itself to get all errors
+	    if ($form->hasChildren()) {
+	        foreach ($form->getChildren() as $child) {
+	            if (!$child->isValid()) {
+	                $this->data['validation']['errors'][$child->getName()] = $this->getErrorMessages($child);
+	            }
+	        }
+	    } else {
+	        foreach ($form->getErrors() as $key => $error) {
+	            $this->data['validation']['errors'][] = $error->getMessage();
+	        }   
+	    }
+
+	    return $this;
 	}
 }
