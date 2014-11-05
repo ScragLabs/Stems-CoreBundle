@@ -29,8 +29,8 @@ services:
             tags:
                 - { name: twig.extension }
 
-    stems.core.front_listener:
-        class: Stems\CoreBundle\EventListener\FrontListener
+    stems.core.listener.base:
+        class: Stems\CoreBundle\EventListener\BaseListener
         arguments: 
             em: "@doctrine.orm.entity_manager"
         tags:

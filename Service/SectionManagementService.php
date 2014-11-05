@@ -184,7 +184,7 @@ class SectionManagementService
 	/**
 	 * Renders the front end html for all sections of collection of entities
 	 *
-	 * @param  mixed 	$parent  	The entities owning sections for rendering
+	 * @param  mixed 	$parents  	The entities owning sections for rendering
 	 * @return array 				A list containing html for each section nested by entity
 	 */
 	public function renderCollection($parents)

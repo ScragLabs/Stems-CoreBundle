@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 class BaseAdminController extends Controller
 {
 	/**
+	 * A pointer for the entity manager, because we need it so much for admin actions it's tidier this way.
+	 */
+	public $em;
+
+	/**
 	 * Render the dialogue for the module's dashboard entry in the admin panel, defaulting to nothing if you don't want it in the dash.
 	 */
 	public function dashboardAction()
