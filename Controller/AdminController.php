@@ -105,7 +105,7 @@ class AdminController extends Controller
 		fwrite($handle, ''.$xml.'');
 		fclose($handle);
 
-		$request->getSession()->setFlash('success', 'The sitemap has been updated.');
+		$request->getSession()->getFlashBag()->set('success', 'The sitemap has been updated.');
 		return $this->redirect($this->generateUrl($this->home));
 	}
 }

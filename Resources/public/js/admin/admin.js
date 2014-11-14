@@ -21,6 +21,7 @@ function createFlashMessage(type, message) {
  */
 function updateFeatureImage(data, originator) {
 	$('.feature-image').html(data.html).removeClass('feature-image-empty');
+	$('.feature-image-container input').val(data.meta.id);
 }
 
 /**

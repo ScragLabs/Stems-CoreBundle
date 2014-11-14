@@ -983,6 +983,15 @@ button.full-size {
 
 /* --- EDIT SECTION - MAGAZINE --- */
 
+.section-blog-header .image {
+	height: 360px;
+	width: 720px;
+	margin: 20px 10px;
+	background-size: cover;
+}
+
+/* --- EDIT SECTION - MAGAZINE --- */
+
 .section-magazine .column,
 .section-text-and-image .column {
 	float: left;
