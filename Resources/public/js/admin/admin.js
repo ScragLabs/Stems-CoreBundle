@@ -25,6 +25,15 @@ function updateFeatureImage(data, originator) {
 }
 
 /**
+ * Hide a admin popup
+ */
+function hidePopup(originator) {
+	originator.closest('.admin-popup').slideToggle(function() {
+		$(this).closest('.admin-popup-background').remove();
+	});
+}
+
+/**
  * Slugify a string
  */
 function slugify(string) {
@@ -101,9 +110,7 @@ $(document).ready(function() {
 				eval(callback)(data, originator);
 			}
 
-			originator.parent().parent().slideToggle(function() {
-				$(this).parent().remove();
-			});
+			hidePopup(originator);
 		});
 	});
 
@@ -147,16 +154,46 @@ $(document).ready(function() {
 			}
 
 			if (data.callback) {
-
 				var callback = data.callback;
 				eval(callback)(data, originator);
 			}
 
-			originator.parent().parent().slideToggle(function() {
-				$(this).parent().remove();
-			});
+			hidePopup(originator);
+			
 		}).fail(function(data) {
 			originator.html(buttonText);
+		});
+	});
+
+	/**
+	 * Standardised popup validation only request
+	 */
+	$('body').on('click', '.rest-validation-popup', function(e) {
+		e.preventDefault();
+		var originator = $(this);
+		var form = $('.admin-popup form');
+		var buttonText = originator.html();
+		var buttonWidth = originator.css('width');
+
+		originator.css('width', buttonWidth);
+		originator.html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+
+		$.post(form.attr('action'), form.serialize()).done(function(data) {
+			originator.html(buttonText);
+
+			if (data.flash) {
+				createFlashMessage(data.status, data.message);
+			}
+
+			if (data.callback) {
+				var callback = data.callback;
+				eval(callback)(data, originator);
+			}
+
+			if (data.status == 'success') {
+				hidePopup(originator);
+			}
+			
 		});
 	});
 
@@ -164,6 +201,16 @@ $(document).ready(function() {
 	 * Sortable elements init
 	 */
 	$('.sortable').sortable();
+
+	/**
+	 * Remove a gallery item and update the offset
+	 */
+	$('body').on('click', '.add-item-to-gallery .remove-item', function (e) {
+		e.preventDefault();
+		$(this).parent().remove();
+		var adder = $(this).closest('.add-item-to-gallery').children('.add-item');
+		adder.data('offset', adder.data('offset') + 1);
+	});
 
 	/**
 	 * Change edit tabs

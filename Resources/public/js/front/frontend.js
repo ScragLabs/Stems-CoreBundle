@@ -259,6 +259,13 @@ $(document).ready(function() {
 	$(window).scroll(function(){
 		if (!currently_loading && loader_buffer.length) {
 
+			// Check whether the loader is a packery layout
+			if (typeof this.packery !== 'undefined') {
+				var packery = this.packery;
+			} else {
+				var packery = false;
+			}
+
 			// get our current offset and the y scroll position
 			total_loaded = loader_buffer.data('offset');
 
@@ -276,8 +283,10 @@ $(document).ready(function() {
 					currently_loading = false;
 
 					// check if we're loading into an isotope frame, as these are handled differently
-					if (typeof $container !== 'undefined') {
-						$container.isotope('insert', $(data.html));
+					if (packery) {
+						$('#packery-loader').append($(data.html));
+						packery.reloadItems();
+						packery.layout();
 					} else {
 						loader_buffer.before(data.html);
 					}
@@ -358,50 +367,43 @@ $(document).ready(function() {
 
 	// View product
 
-	var view_product_dialogue = $('.view-product-dialogue');
-	var view_product_dialogue_close =  $('.view-product-dialogue .close');
-	var container = $('.view-product-dialogue .container');
-	var view_loaded = false;
+	// var view_product_dialogue = $('.view-product-dialogue');
+	// var view_product_dialogue_close =  $('.view-product-dialogue .close');
+	// var container = $('.view-product-dialogue .container');
+	// var view_loaded = false;
 
-	$('.product').on('click', 'a.view', function(e) {
-		e.preventDefault();
-		container.addClass('ajax-loader');
-		container.html('');
-		view_loaded = true;
-		product_grid.css('height', '960px');
-		$(window).scrollTop(150);
-		view_product_dialogue.show();
+	// $('.product').on('click', 'a.view', function(e) {
+	// 	e.preventDefault();
+	// 	container.addClass('ajax-loader');
+	// 	container.html('');
+	// 	view_loaded = true;
+	// 	product_grid.css('height', '960px');
+	// 	$(window).scrollTop(150);
+	// 	view_product_dialogue.show();
 
-		$.get('/rest/view-product/'+$(this).data('pid')).done(function(data) {
-			if (data.success) {
-				container.html(data.html);
-				product_grid.css('height', container.height+'px');
-				container.removeClass('ajax-loader');
-			} else {
+	// 	$.get('/rest/view-product/'+$(this).data('pid')).done(function(data) {
+	// 		if (data.success) {
+	// 			container.html(data.html);
+	// 			product_grid.css('height', container.height+'px');
+	// 			container.removeClass('ajax-loader');
+	// 		} else {
 
-			}
-		}).fail(function() {
-			view_product_dialogue.fadeOut();
-		});
-	});
+	// 		}
+	// 	}).fail(function() {
+	// 		view_product_dialogue.fadeOut();
+	// 	});
+	// });
 
-	var y = $(window).scrollTop();
+	// var y = $(window).scrollTop();
 
-	view_product_dialogue_close.on('click', function() {
-		product_grid.css('height', 'auto');
-		view_product_dialogue.hide();
-		$(window).scrollTop(y);
-		view_loaded = false;
-	});
+	// view_product_dialogue_close.on('click', function() {
+	// 	product_grid.css('height', 'auto');
+	// 	view_product_dialogue.hide();
+	// 	$(window).scrollTop(y);
+	// 	view_loaded = false;
+	// });
 
 	// View product frame scroller (and universal scroll position logger)
-
-	$(window).scroll(function(){
-
-		if (container && !view_loaded) {
-			y = $(window).scrollTop();
-		}
-	});
 
 	// Add to wishlist
 
@@ -516,7 +518,7 @@ $(document).ready(function() {
 	function scrollingSidebar() { 
 		var y = $(window).scrollTop();
 
-		if (container) {
+		if (sidebar_container) {
 			var top_clip = 0;
 			var bottom_clip = $('.layout-sidebar').height()-sidebar_container.height()-40;
 

@@ -22,4 +22,12 @@ class BaseFrontController extends Controller
 	 * A pointer for the entity manager, because we'll always need to load it for front end page it cuts down on controller fat by having it here.
 	 */
 	public $em;
+
+	/**
+	 * Manually load in a CMS page
+	 */
+	protected function loadPage($slug, $options = array())
+	{
+		$this->page = $this->em->getRepository('StemsPageBundle:Page')->load($slug, $options);
+	}
 }

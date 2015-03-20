@@ -117,17 +117,17 @@ class BaseRestController extends Controller
 	    }
 
 	    // Loop through the form children and the form itself to get all errors
-	    if ($form->hasChildren()) {
-	        foreach ($form->getChildren() as $child) {
-	            if (!$child->isValid()) {
-	                $this->data['validation']['errors'][$child->getName()] = $this->getErrorMessages($child);
-	            }
-	        }
-	    } else {
+	    // if ($form->hasChildren()) {
+	    //     foreach ($form->getChildren() as $child) {
+	    //         if (!$child->isValid()) {
+	    //             $this->data['validation']['errors'][$child->getName()] = $this->getErrorMessages($child);
+	    //         }
+	    //     }
+	    // } else {
 	        foreach ($form->getErrors() as $key => $error) {
 	            $this->data['validation']['errors'][] = $error->getMessage();
 	        }   
-	    }
+	    // }
 
 	    return $this;
 	}
