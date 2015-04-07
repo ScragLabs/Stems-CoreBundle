@@ -123,9 +123,9 @@ $(document).ready(function() {
 		var form = $('.admin-popup form');
 		var data = new FormData();
 		var buttonText = originator.html();
-		var buttonWidth = originator.css('width');
+		var buttonWidth = originator.width();
 
-		originator.css('width', buttonWidth);
+		originator.css('width', buttonWidth+'px');
 		originator.html('<i class="fa fa-circle-o-notch fa-spin"></i> Uploading');
 
 		form.find('input').each(function(e) {

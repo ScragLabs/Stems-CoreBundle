@@ -732,8 +732,7 @@ input[type="submit"].btn.btn-mini {
 
 .admin-editor .edit-panel .preview-image {
 	position: relative;
-	width: 354px;
-	min-height: 354px;
+	text-align: center;
 }
 
 .admin-editor .edit-panel .preview-image-empty {
@@ -925,13 +924,6 @@ input[type="submit"].btn.btn-mini {
 }
 
 /* --- BLOG & PAGE EDITORS --- */
-
-button.remove-section {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	font-weight: 400 !important;
-}
 
 button.full-size {
 	position: absolute;
@@ -1249,19 +1241,7 @@ button.full-size {
 
 /*--- SECTION STYLES ---*/
 
-section .toolbar {
-	background: #03e5ff;
-	display: none;
-	position: absolute;
-	top: -30px;
-	left: 0;
-	height: 30px;
-	width: 100%;
-}
 
-section:hover .toolbar {
-	display: block;
-}
 
 section.section-text,
 section.section-heading {
@@ -1312,6 +1292,10 @@ section.col-1 .preview-image.squared img {
 	max-width: 450px;
 	max-height: 450px;
 	margin: auto;
+}
+
+section .preview-image.full-width img {
+   width: 100%;
 }
 
 section.section-text textarea,
@@ -1536,23 +1520,91 @@ section.section-product-gallery .gallery-collection .collection-offset {
 	margin-left: 100px;
 }
 
+section .preview.alignment-left > h6,
+section .preview.alignment-left > h4,
+section .preview.alignment-left > textarea {
+    text-align: left;
+}
+
+section .preview.alignment-center > h6,
+section .preview.alignment-center > h4,
+section .preview.alignment-center > textarea{
+    text-align: center;
+}
+
+section .preview.alignment-right > h6,
+section .preview.alignment-right > h4,
+section .preview.alignment-right > textarea {
+    text-align: right;
+}
+
 /*--- SECTION TOOLS ---*/
 
-section aside.toolbar > .toolbox-list,
-section aside.toolbar > button {
+section .toolbar {
+    background: rgba(16,16,16,0.4);
+    z-index:100;
+    display: none;
+    position: absolute;
+    top: -31px;
+    left: -1px;
+    height: 30px;
+    width: calc(100% - 6px);
+    padding: 0 4px;
+}
+
+section:hover .toolbar {
+    display: block;
+}
+
+section .toolbar > .tool {
 	float: right;
-
+    position: relative;
+    background: none;
 }
 
-section aside.toolbar button,
-section aside.toolbar i {
-	color: #FFFFFF;
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-size: 16px;
+section .toolbar > .tool a {
+    width: 22px;
+    height: 22px;
+    margin: 3px 0 0 4px;
+    text-align: center;
+    border: none;
+    display: block;
+    cursor: pointer;
+    color: #fff;
 }
 
-section aside.toolbar .toolbox-list ul {
+section .toolbar > .tool a > i {
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    text-align: center;
+}
+
+section aside.toolbar .tool ul {
 	list-style: none;
+    display: none;
+    position: absolute;
+    top: 24px;
+    padding-top: 6px;
+    right: 0;
+}
+
+section aside.toolbar .tool:hover ul {
+    display: block;
+}
+
+section aside.toolbar .tool ul li {
+    padding-top: 2px;
+}
+
+section aside.toolbar .tool ul li a {
+    background: rgba(16,16,16,0.4);
+    margin: 0;
+    font-weight: bold;
+}
+
+section aside.toolbar .tool:hover > a > i,
+section aside.toolbar .tool ul li a:hover > i,
+section aside.toolbar .tool ul li a:hover {
+    color: #26deff;
 }
