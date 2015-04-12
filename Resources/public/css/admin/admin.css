@@ -577,6 +577,7 @@ input[type="submit"].btn.btn-mini {
 	font-size: 12px;
 	font-family: 'Roboto', sans-serif;
 	box-shadow: none;
+    width: 930px;
 }
 
 .admin-editor .left-panel {
@@ -947,19 +948,15 @@ button.full-size {
 }
 
 #add-section .available-sections {
-	overflow: hidden;
-	display: none;
+    text-align: center;
 }
 
 #add-section .available-sections a {
-	width: 213px;
+	width: 20px;
 	height: 20px;
-	float:left;
+    padding: 11px;
+	display: inline-block;
 	margin: 0 10px 10px 0;
-}
-
-#add-section .available-sections a:nth-child(3n) {
-	margin-right: 0;
 }
 
 #add-section .available-sections a > i {
@@ -1239,9 +1236,63 @@ button.full-size {
 	width: 930px;
 }
 
+/*--- GENERAL SECTION STYLES ---*/
+
+section {
+    color: #111111;
+    font-family:'Futura PT Multilingual W01';
+    -webkit-font-smoothing: antialiased !important;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+section .preview hr {
+    border: none;
+    border-top: 1px dashed #DDDDDD;
+    height:1px;
+    margin:7px;
+}
+
+section .preview textarea.wysiwig-editor {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    position: absolute;
+    left: 7;
+    top: 7;
+    height: calc(100% - 15px);
+    opacity: 0;
+    z-index: 2;
+    color: #111111;
+    font-family:'Futura PT Multilingual W01';
+    -webkit-font-smoothing: antialiased !important;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+section .preview textarea.wysiwig-editor:focus,
+section .preview textarea.wysiwig-editor:hover {
+    opacity: 1;
+}
+
+section .preview textarea.wysiwig-editor:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+section .preview textarea.wysiwig-editor {
+    min-height: 20px;
+}
+
+section .preview .wysiwig-preview {
+    min-height: 22px;
+}
+
+
+
+
 /*--- SECTION STYLES ---*/
-
-
 
 section.section-text,
 section.section-heading {
@@ -1253,13 +1304,13 @@ section.section-heading textarea  {
 	border: 0;
 	margin: 0;
 	padding: 0;
-	height: auto;
 	background: #FFFFFF;
 	position: absolute;
 	left: 7;
 	top: 7;
 	height: calc(100% - 15px);
 	opacity: 0;
+    z-index: 2;
 }
 
 section.section-text textarea:focus,
@@ -1282,6 +1333,13 @@ section.col-1 input[type=password] {
 	resize: none;
 }
 
+section.col-2 textarea,
+section.col-2 input[type=text],
+section.col-2 input[type=password] {
+    width: 930px;
+    resize: none;
+}
+
 section.col-1 .preview-image.squared {
 	width: 450px;
 	height: 450px;
@@ -1298,20 +1356,11 @@ section .preview-image.full-width img {
    width: 100%;
 }
 
-section.section-text textarea,
-section.section-text p {
-	color: #111111;
-	font-family:'Futura PT Multilingual W01';
-	-webkit-font-smoothing: antialiased !important;
-	font-size: 15px;
-	font-weight: 200;	
-}
-
 section.section-text p > a {
 	font-weight: 400;
 }
 
-section.section-heading textarea,
+section.section-heading textarea.h6,
 section.section-heading h6 {
 	color: #111111;
 	-webkit-font-smoothing: antialiased !important;
@@ -1323,15 +1372,14 @@ section.section-heading h6 {
 	font-size: 20px;
 }
 
+section.section-heading textarea.h4,
 section.section-heading h4 {
 	font-family:'Futura PT Multilingual W01';
 	font-size: 20px;
 	font-weight: 200;
 	text-transform: uppercase;
 	letter-spacing: 7px;
-	opacity: .7;
-	position: absolute;
-	width: 100%;
+	color: rgba(0,0,0,0.7);
 }
 
 section.section-page-break {
@@ -1536,6 +1584,45 @@ section .preview.alignment-right > h6,
 section .preview.alignment-right > h4,
 section .preview.alignment-right > textarea {
     text-align: right;
+}
+
+/*--- LIST SECTION ---*/
+
+section.section-list ul {
+    list-style: none;
+}
+
+section.section-list li {
+    position:relative;
+}
+
+section.section-list li > p {
+    margin:7px 0;
+    font-size: 15px;
+}
+
+section.section-list .preview > div {
+    position: relative;
+}
+
+section.section-list .preview textarea.wysiwig-editor {
+    left:0;
+    top:0;
+}
+
+section.section-list.italics-list h5 {
+    font-weight:400;
+    font-size: 15px;
+}
+
+section.section-list.italics-list h5,
+section.section-list.italics-list p,
+section.section-list.italics-list textarea.wysiwig-editor {
+    font-style:italic;
+}
+
+section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
+    font-weight:400;
 }
 
 /*--- SECTION TOOLS ---*/
