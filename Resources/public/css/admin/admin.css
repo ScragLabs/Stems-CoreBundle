@@ -1386,21 +1386,21 @@ section.section-page-break {
 	width: 930px !important;
 }
 
-section.text-align-center p,
-section.text-align-center h4,
-section.text-align-center h6 {
+section.alignment-center p,
+section.alignment-center h4,
+section.alignment-center h6 {
 	text-align: center;
 }
 
-section.text-align-left p,
-section.text-align-left h4,
-section.text-align-left h6 {
+section.alignment-left p,
+section.alignment-left h4,
+section.alignment-left h6 {
 	text-align: left;
 }
 
-section.text-align-right p,
-section.text-align-right h4,
-section.text-align-right h6 {
+section.alignment-right p,
+section.alignment-right h4,
+section.alignment-right h6 {
 	text-align: right;
 }
 
@@ -1568,21 +1568,21 @@ section.section-product-gallery .gallery-collection .collection-offset {
 	margin-left: 100px;
 }
 
-section .preview.alignment-left > h6,
-section .preview.alignment-left > h4,
-section .preview.alignment-left > textarea {
+section.alignment-left h6,
+section.alignment-left h4,
+section.alignment-left textarea {
     text-align: left;
 }
 
-section .preview.alignment-center > h6,
-section .preview.alignment-center > h4,
-section .preview.alignment-center > textarea{
+section.alignment-center h6,
+section.alignment-center h4,
+section.alignment-center textarea{
     text-align: center;
 }
 
-section .preview.alignment-right > h6,
-section .preview.alignment-right > h4,
-section .preview.alignment-right > textarea {
+section.alignment-right h6,
+section.alignment-right h4,
+section.alignment-right textarea {
     text-align: right;
 }
 
