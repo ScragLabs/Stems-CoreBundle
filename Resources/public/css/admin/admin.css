@@ -1586,6 +1586,12 @@ section.alignment-right textarea {
     text-align: right;
 }
 
+/*--- IMAGE SECTION ---*/
+
+.admin-editor .layout-editor section.section-image {
+    background: none;
+}
+
 /*--- LIST SECTION ---*/
 
 section.section-list ul {
@@ -1633,7 +1639,7 @@ section .toolbar {
     display: none;
     position: absolute;
     top: -31px;
-    left: -1px;
+    right: -1px;
     height: 30px;
     width: calc(100% - 6px);
     padding: 0 4px;
@@ -1641,6 +1647,7 @@ section .toolbar {
 
 section:hover .toolbar {
     display: block;
+    border-color: rgba(16,16,16,0.4);
 }
 
 section .toolbar > .tool {
@@ -1658,6 +1665,11 @@ section .toolbar > .tool a {
     display: block;
     cursor: pointer;
     color: #fff;
+}
+
+section .toolbar > .tool a.wide {
+    width: 100px;
+    font-weight: normal;
 }
 
 section .toolbar > .tool a > i {
@@ -1694,4 +1706,16 @@ section aside.toolbar .tool:hover > a > i,
 section aside.toolbar .tool ul li a:hover > i,
 section aside.toolbar .tool ul li a:hover {
     color: #26deff;
+}
+
+/*--- CSS FILTERS ---*/
+
+.css-filter-grayscale img {
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+.css-filter-sepia img {
+    filter: sepia(1);
+    -webkit-filter: sepia(1);
 }
