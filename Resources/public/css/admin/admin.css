@@ -1228,6 +1228,10 @@ button.full-size {
 	cursor: move;
 }
 
+.admin-editor .layout-editor section:hover {
+    border-color: #26deff;
+}
+
 .admin-editor .layout-editor.col-2 section.col-1 {
 	width: 450px;
 }
@@ -1237,6 +1241,31 @@ button.full-size {
 }
 
 /*--- GENERAL SECTION STYLES ---*/
+
+section .ui-resizable-handle {
+    font-family: 'FontAwesome';
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: #26deff;
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    visibility: hidden;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    cursor: nwse-resize;
+    text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+}
+
+section:hover .ui-resizable-handle {
+    visibility: visible;
+}
+
+section .ui-resizable-handle:before {
+    content: "\f065";
+}
 
 section {
     color: #111111;
@@ -1288,9 +1317,6 @@ section .preview textarea.wysiwig-editor {
 section .preview .wysiwig-preview {
     min-height: 22px;
 }
-
-
-
 
 /*--- SECTION STYLES ---*/
 
@@ -1350,6 +1376,15 @@ section.col-1 .preview-image.squared img {
 	max-width: 450px;
 	max-height: 450px;
 	margin: auto;
+}
+
+section.unpinned .preview-image {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+section.unpinned .preview-image img {
+    height: 100% !important;
 }
 
 section .preview-image.full-width img {
