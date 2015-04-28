@@ -1627,6 +1627,27 @@ section.alignment-right textarea {
     background: none;
 }
 
+/*--- PRODUCT SECTION ---*/
+
+.admin-editor .layout-editor section.section-product {
+    background: none;
+}
+
+section.section-product .add-product .loader {
+    display: none;
+}
+
+section.section-product .add-product input[type=text] {
+    text-align: center;
+    margin: 30px;
+    width: 390px;
+}
+
+section.section-product .add-product label {
+    margin: 0 0 30px;
+}
+
+
 /*--- LIST SECTION ---*/
 
 section.section-list ul {
