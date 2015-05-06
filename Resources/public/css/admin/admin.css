@@ -1362,20 +1362,53 @@ section.col-1 input[type=password] {
 section.col-2 textarea,
 section.col-2 input[type=text],
 section.col-2 input[type=password] {
-    width: 930px;
     resize: none;
 }
 
-section.col-1 .preview-image.squared {
-	width: 450px;
+
+.layout-editor.col-4 section.col-1,
+.layout-editor.col-4 section.col-1 .preview-image.squared {
+    width: 210px;
+}
+
+.layout-editor.col-2 section.col-1,
+.layout-editor.col-4 section.col-2,
+.layout-editor.col-2 section.col-1 .preview-image.squared,
+.layout-editor.col-4 section.col-2 .preview-image.squared {
+    width: 450px;
+}
+
+.layout-editor.col-4 section.col-3 {
+    width: 670px;
+}
+
+.layout-editor.col-2 section.col-2,
+.layout-editor.col-4 section.col-4 {
+    width: 930px;
+}
+
+.layout-editor.col-2 section.col-1 .preview-image.squared,
+.layout-editor.col-4 section.col-2 .preview-image.squared {
 	height: 450px;
     text-align: center;
 }
 
-section.col-1 .preview-image.squared img {
+.layout-editor.col-4 section.col-1 .preview-image.squared {
+    height: 210px;
+    text-align: center;
+}
+
+.layout-editor.col-2 section.col-1 .preview-image.squared img,
+.layout-editor.col-4 section.col-2 .preview-image.squared img {
 	max-width: 450px;
 	max-height: 450px;
 	margin: auto;
+}
+
+.layout-editor.col-4 section.col-1 .preview-image.squared img {
+    max-width: 210px;
+    max-height: 210px;
+    margin: auto;
 }
 
 section.unpinned .preview-image {
@@ -1637,10 +1670,16 @@ section.section-product .add-product .loader {
     display: none;
 }
 
-section.section-product .add-product input[type=text] {
+.layout-editor.col-2 section.section-product .add-product input[type=text] {
     text-align: center;
     margin: 30px;
     width: 390px;
+}
+
+.layout-editor.col-4 section.section-product .add-product input[type=text] {
+    text-align: center;
+    margin: 25px;
+    width: 157px;
 }
 
 section.section-product .add-product label {
