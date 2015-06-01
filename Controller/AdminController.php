@@ -91,7 +91,7 @@ class AdminController extends Controller
 	public function sitemapAction(Request $request)
 	{
 		// Load the active Stems and bespoke bundles
-		$bundles = $this->get('stems.core.bundles.management')->getActiveBundles();
+		$bundles = $this->container->getParameter('stems.site.sitemap.bundles');
 
 		// render the xml sitemap
 		$xml = $this->renderView('StemsCoreBundle:Admin:sitemap.html.twig', array(
