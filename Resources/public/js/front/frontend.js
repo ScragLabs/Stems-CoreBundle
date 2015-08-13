@@ -614,15 +614,15 @@ $(document).ready(function() {
 	});
 
 	$('body').on('click', '.gallery-layout-feature button.next', function() {
-		$(this).parent().nextImage();
+		$(this).closest('.gallery-layout-feature').nextImage();
 	});
 
 	$('body').on('click', '.gallery-layout-feature button.prev', function() {
-		$(this).parent().prevImage();
+		$(this).closest('.gallery-layout-feature').prevImage();
 	});
 
 	$('body').on('click', '.gallery-layout-feature .gallery-thumbnails .product', function() {
-		$(this).parent().updateImage($(this).data('image'));
+		$(this).closest('.gallery-layout-feature').updateImage($(this).data('image'));
 	});
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
