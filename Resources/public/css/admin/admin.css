@@ -1268,11 +1268,12 @@ section .ui-resizable-handle:before {
 }
 
 section {
-    color: #111111;
-    font-family:'Futura PT Multilingual W01';
+    color: #000;
+    font-family:'Avenir Next W01', sans-serif;
     -webkit-font-smoothing: antialiased !important;
-    font-size: 15px;
-    font-weight: 200;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
 }
 
 section .preview hr {
@@ -1293,11 +1294,12 @@ section .preview textarea.wysiwig-editor {
     height: calc(100% - 15px);
     opacity: 0;
     z-index: 2;
-    color: #111111;
-    font-family:'Futura PT Multilingual W01';
+    color: #000;
+    font-family:'Avenir Next W01', sans-serif;
     -webkit-font-smoothing: antialiased !important;
-    font-size: 15px;
-    font-weight: 200;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
 }
 
 section .preview textarea.wysiwig-editor:focus,
@@ -1442,7 +1444,10 @@ section.section-heading h6 {
 
 section.section-heading textarea.h4,
 section.section-heading h4 {
-	font-family:'Futura PT Multilingual W01';
+    color: #000;
+    font-family:'Avenir Next W01', sans-serif;
+    -webkit-font-smoothing: antialiased !important;
+    line-height: 20px;
 	font-size: 20px;
 	font-weight: 200;
 	text-transform: uppercase;
