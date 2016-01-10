@@ -1430,16 +1430,24 @@ section.section-text p > a {
 	font-weight: 400;
 }
 
+section.section-heading.text-align-center h4,
+section.section-heading.text-align-center h5,
+section.section-heading.text-align-center h6,
+section.section-heading.text-align-center textarea
+{
+    text-align: center;
+}
+
 section.section-heading textarea.h6,
 section.section-heading h6 {
-	color: #111111;
-	-webkit-font-smoothing: antialiased !important;
-	font-family: 'Linotype Didot W01', serif;
-	letter-spacing: -1px;	
-	font-weight: 400;
-	margin: 0;
-	text-transform: uppercase;
-	font-size: 20px;
+    font-family: 'Linotype Didot W01',serif;
+    display: block;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 200;
+    margin-top: 5px;
+    letter-spacing: -1px;
+    font-style: italic;
 }
 
 section.section-heading textarea.h4,
