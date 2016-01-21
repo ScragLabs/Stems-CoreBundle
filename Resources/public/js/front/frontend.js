@@ -576,7 +576,7 @@ $(document).ready(function() {
 	// Feature style image galleries
 
 	$.fn.featureImageGallery = function() {
-		$(this).data('features', $(this).children('.feature-image').children('.product'));
+		$(this).data('features', $(this).find('.section-product-gallery-feature__product'));
 		if (!$(this).data('currentImage')) {
 			$(this).data('currentImage', 1);
 		}
@@ -613,15 +613,15 @@ $(document).ready(function() {
 		$(this).featureImageGallery();
 	});
 
-	$('body').on('click', '.gallery-layout-feature button.next', function() {
+	$('body').on('click', '.section-product-gallery-feature__next', function() {
 		$(this).closest('.gallery-layout-feature').nextImage();
 	});
 
-	$('body').on('click', '.gallery-layout-feature button.prev', function() {
+	$('body').on('click', '.section-product-gallery-feature__prev', function() {
 		$(this).closest('.gallery-layout-feature').prevImage();
 	});
 
-	$('body').on('click', '.gallery-layout-feature .gallery-thumbnails .product', function() {
+	$('body').on('click', '.section-product-gallery-feature__thumbnail-product', function() {
 		$(this).closest('.gallery-layout-feature').updateImage($(this).data('image'));
 	});
 
