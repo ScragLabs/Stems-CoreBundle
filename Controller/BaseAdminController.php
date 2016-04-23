@@ -2,9 +2,8 @@
 
 namespace Stems\CoreBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -14,6 +13,8 @@ class BaseAdminController extends Controller
 {
 	/**
 	 * A pointer for the entity manager, because we need it so much for admin actions it's tidier this way.
+	 *
+	 * @var ObjectManager
 	 */
 	public $em;
 
