@@ -1,38 +1,42 @@
 <ul class="core">
-	{% for item in core	%}
-		<li>
-			<a href="{{ path(item['route']) }}" title="{{ item['title'] }}"><i class="{{ item['icon'] }}"></i></a>
-			{% if item.children is not empty %}
-				<ul>
-					{% for child in item.children %}
-						<li><a href="{{ path(child['route']) }}"><i class="{{ child['icon'] }}"></i> {{ child['title'] }}</a></li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-		</li>
-	{% endfor %}
+    {% for item in core %}
+        <li>
+            <a href="{{ path(item['route']) }}" title="{{ item['title'] }}"><i class="{{ item['icon'] }}"></i></a>
+            {% if item.children is not empty %}
+                <ul>
+                    {% for child in item.children %}
+                        <li><a href="{{ path(child['route']) }}"><i
+                                        class="{{ child['icon'] }}"></i> {{ child['title'] }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
 </ul>
 <ul class="bespoke">
-	<li><a href="/admin/products" title="Products"><i class="fa fa-shopping-cart"></i></a></li>
-	<li><a href="{{ path('thread_editorspicks_admin_collections') }}" title="Editor's Picks"><i class="fa fa-star"></i></a></li>
-	<li><a href="/admin/street-chic" title="Street Chic"><i class="fa fa-camera-retro"></i></a></li>
-	<li><a href="/admin/threadandmirror/social" title="Social Feeds"><i class="fa fa-rss"></i></a></li>
+    <li><a href="{{ path('thread_blog_admin_index') }}" title="Magazine"><i class="fa fa-edit"></i></a></li>
+    <li><a href="{{ path('thread_instainspo_admin_index') }}" title="Insta Inspo"><i class="fa fa-instagram"></i></a>
+    </li>
 </ul>
 <ul class="config">
-	{% for item in config %}
-		<li>
-			<a href="{{ path(item['route']) }}" title="{{ item['title'] }}"><i class="{{ item['icon'] }}"></i></a>
-			{% if item.children is not empty %}
-				<ul>
-					{% for child in item.children %}
-						<li><a href="{{ path(child['route']) }}"><i class="{{ child['icon'] }}"></i> {{ child['title'] }}</a></li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-		</li>
-	{% endfor %}
+    {% for item in config %}
+        <li>
+            <a href="{{ path(item['route']) }}" title="{{ item['title'] }}"><i class="{{ item['icon'] }}"></i></a>
+            {% if item.children is not empty %}
+                <ul>
+                    {% for child in item.children %}
+                        <li>
+                            <a href="{{ path(child['route']) }}">
+                                <i class="{{ child['icon'] }}"></i> {{ child['title'] }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
 </ul>
-	
+
 <div class="account">
-	<p>Welcome, {{ app.user.fullname }}</p>	
+    <p>Welcome, {{ app.user.fullname }}</p>
 </div>
